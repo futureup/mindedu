@@ -1,5 +1,7 @@
 <?php
 
-$url = $_GET['url'];
-
-echo $url;
+require 'libs/Bootstrap.php';
+require 'libs/Controller.php';
+require 'libs/View.php';
+require 'libs/Model.php';
+$app = new Bootstrap();
