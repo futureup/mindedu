@@ -5,12 +5,15 @@
 
 .header {
     background-color: gray;
+    padding: 20px;
 }
 
 .content {
     background-color: silver;
+    padding: 20px;
 }
 
 .footer {
     background-color: yellow;
+    padding: 20px;
 }

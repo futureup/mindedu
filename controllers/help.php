@@ -5,7 +5,11 @@ class Help extends Controller
     function __construct()
     {
         parent::__construct();
-        echo 'this is help';
+        
+    }
+
+    function index() {
+        $this->view->render('help/index');
     }
 
     public function other($arg = false)

@@ -4,13 +4,17 @@ class View
 {
     function __construct()
     {
-        echo 'This is view';
+        //echo 'This is view';
     }
 
-    public function render($name)
+    public function render($name, $noInclude = false)
     {
-        require 'views/header.php';
-        require 'views/' .$name. '.php';
-        require 'views/footer.php';
+        if ($noInclude == true) {
+            require 'views/' .$name. '.php';
+        } else {
+            require 'views/header.php';
+            require 'views/' .$name. '.php';
+            require 'views/footer.php';
+        }
     }
 }

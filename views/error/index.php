@@ -1,4 +1,4 @@
 <hr/>
-<?php echo $this->msg; ?>
+<!-- <?php echo $this->msg; ?> -->
 
 This is the error.

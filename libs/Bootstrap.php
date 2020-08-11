@@ -6,13 +6,14 @@ class Bootstrap
     {
         $url = isset($_GET['url']) ? $_GET['url'] : null;
         $url = rtrim($url, '/');
-        $url = explode('/', $_GET['url']);
+        $url = explode('/', $url);
         //print_r($url);
 
         if (empty($url[0]))
         {
             require 'controllers/index.php';
             $controller = new Index();
+            $controller->index();
             return false;
         }
 
@@ -23,22 +24,50 @@ class Bootstrap
         } 
         else
         {
-            require 'controllers/errors.php';
-            $controller = new Errors();
-            return false;
+            //require 'controllers/errors.php';
+            //$controller = new Errors();
+            //return false;
             // throw new Exception("The file: $file Doesn't exists.");
+            $this->error();
         }
 
-        $controller = new $url[0];
+        if (class_exists($url[0])) {
+            $controller = new $url[0];
+            $controller->loadModel($url[0]);
+        } else {
+            return false;
+        }
+        
 
 
         if (isset($url[2]))
         {
-            $controller->{$url[1]}($url[2]);
+            if (method_exists($controller, $url[1])) {
+                $controller->{$url[1]}($url[2]);
+            } else {
+                $this->error();
+            }
+            
+        } 
+        elseif (isset($url[1]))
+        {
+            if (method_exists($controller, $url[1])) {
+                $controller->{$url[1]}();
+            } else {
+                $this->error();
+            }            
         } 
         else
         {
-            $controller->{$url[1]}();
+            $controller->index();
         }
+
+    }
+
+    function error() {
+        require 'controllers/errors.php';
+        $controller = new Errors();
+        $controller->index();
+        return false;
     }
 }
